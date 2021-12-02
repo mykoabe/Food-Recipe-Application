@@ -1,0 +1,7 @@
+query allRecipes {
+  recipe {
+    id
+    name
+    description
+  }
+}
