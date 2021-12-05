@@ -27,7 +27,7 @@ const actions = {
     authService.logout();
     commit("logout");
     router.push("/");
-  }
+  },
 };
 
 const mutations = {
@@ -46,7 +46,7 @@ const mutations = {
   logout(state) {
     state.status = {};
     state.user = null;
-  }
+  },
 };
 
 const getters = {
@@ -55,7 +55,7 @@ const getters = {
   },
   getReturnUrl(state, getters) {
     return getters["getUser"] && authService.getReturnUrl();
-  }
+  },
 };
 
 export default {
@@ -63,5 +63,5 @@ export default {
   state,
   mutations,
   actions,
-  getters
+  getters,
 };

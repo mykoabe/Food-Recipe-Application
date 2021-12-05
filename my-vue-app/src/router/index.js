@@ -24,17 +24,17 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/categry",
+    path: "/categories",
     name: "Category",
     component: Category,
   },
   {
-    path: "/recipe",
+    path: "/recipes",
     name: "Recipe",
     component: RecipeList,
   },
   {
-    path: "/recipe/:id",
+    path: "/recipes/:id",
     name: "RecipeDetail",
     component: RecipeDetail,
   },

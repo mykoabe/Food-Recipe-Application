@@ -15,10 +15,14 @@
       >
         <div id="nav-menu" class="flex-1 space-x-3 md:ml-36 ml-6">
           <a href="#" class="text-sm hover:font-medium md:mx-4"
-            ><router-link>Home</router-link
-          ></a>
-          <a href="#" class="text-sm hover:font-medium md:mx-4">Recipes</a>
-          <a href="#" class="text-sm hover:font-medium md:mx-4">Category</a>
+            ><router-link to="/home">Home</router-link></a
+          >
+          <a href="#" class="text-sm hover:font-medium md:mx-4"
+            ><router-link to="/recipes">Recipes</router-link></a
+          >
+          <a href="#" class="text-sm hover:font-medium md:mx-4"
+            ><router-link to="/categories">Category</router-link></a
+          >
         </div>
 
         <div id="nav-menu-right" class="space-x-4 mr-16">

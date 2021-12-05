@@ -1,6 +1,6 @@
-import router from "../../router";
-import apolloClient from "../../services/apollo/index";
+import apolloClient from "../../services/apollo";
 import { authService } from "../../services/auth/auth";
+import router from "../../router";
 
 import {
   RECIPES_QUERY,
@@ -8,7 +8,7 @@ import {
   INGREDIENTS_QUERY,
   RECIPE_INGREDIENT_MUTATION,
   RECIPE_UPDATE_MUTATION,
-} from "../../queries/index";
+} from "../../queries";
 
 let state = {
   all: [],
@@ -24,7 +24,7 @@ const actions = {
     const response = await apolloClient.query({
       query: RECIPES_QUERY,
     });
-    console.log(response.errors[0].message);
+    commit("setRecipeList", response.data.recipe);
   },
   selectRecipe({ commit }, recipeId) {
     commit("setRecipe", recipeId);
@@ -64,6 +64,10 @@ const actions = {
 };
 
 const mutations = {
+  setRecipeList(state, recipeList) {
+    state.all = [...recipeList];
+    state.isLoading = false;
+  },
   setRecipe(state, recipeId) {
     state.one = recipeId;
   },
