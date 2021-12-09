@@ -6,6 +6,7 @@ import Category from "../components/category/Category.vue";
 import RecipeList from "../views/recipes/RecipeList.vue";
 import RecipeDetail from "../views/recipes/RecipeDetail.vue";
 import NotFound from "../views/NotFound.vue";
+import SubmitRecipe from "../views/SubmitRecipe.vue";
 import { authService } from "../services/auth/auth";
 import store from "../store";
 
@@ -34,7 +35,12 @@ const routes = [
     component: RecipeList,
   },
   {
-    path: "/recipes/:id",
+    path: "/submit",
+    name: "Submit",
+    component: SubmitRecipe,
+  },
+  {
+    path: "/recipeList",
     name: "RecipeDetail",
     component: RecipeDetail,
   },
@@ -57,7 +63,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const publicPages = ["/", "/home", "/callback"];
+  const publicPages = ["/", "/recipeList", "/home", "/callback"];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = store.getters["account/getUser"];
 

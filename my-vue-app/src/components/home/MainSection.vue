@@ -12,6 +12,7 @@
       <div id="trending_recipes" class="lg:mx-32 sm:mt-6 md:mx-6 mx-6">
         <TrendingRecipes />
       </div>
+        <TheFooter />
     </div>
   </section>
 </template>
@@ -19,11 +20,13 @@
 import BaseCard from "../ui/BaseCard.vue";
 import CategorySection from "./CategorySection.vue";
 import TrendingRecipes from "./TrendingRecipes.vue";
+import TheFooter from "../shared/TheFooter.vue";
 export default {
   components: {
     BaseCard,
     CategorySection,
     TrendingRecipes,
+    TheFooter,
   },
 };
 </script>

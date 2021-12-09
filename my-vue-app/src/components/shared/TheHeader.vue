@@ -86,7 +86,8 @@
         <div id="nav-menu-right" class="space-x-4 sm:md-10">
           <button class="btn btn-login">Login</button>
           <button class="btn btn-submit">
-            <i class="fas fa-plus mr-3"></i>Submit Recipe
+            <i class="fas fa-plus mr-3"></i
+            ><router-link to="/submit">Submit Recipe</router-link>
           </button>
         </div>
       </div>

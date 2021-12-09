@@ -19,8 +19,7 @@ const actions = {
     } catch (e) {
       authService.logout();
       commit("loginFailure", e);
-      router.push({ path: "/" });
-      dispatch("alert/error", { root: true });
+      dispatch("alert/error", '', { root: true });
     }
   },
   logout({ commit }) {

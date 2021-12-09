@@ -4,7 +4,7 @@ import auth0Config from "../../../auth_config";
 const auth0Client = new auth0.WebAuth({
   domain: auth0Config.domain,
   clientID: auth0Config.clientId,
-  redirectUri: "http://localhost:3000/callback",
+  redirectUri: auth0Config.callbackUrl,
   audience: "VueApi",
   responseType: auth0Config.responseType,
   scope: auth0Config.scope,

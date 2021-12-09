@@ -120,6 +120,7 @@
                   </div>
                   <div class="flex ml-24 mt-8">
                     <button
+
                       class="
                         bg-red-500
                         hover:bg-red-700
@@ -132,7 +133,7 @@
                         mb-8
                       "
                     >
-                      Continue Reading
+                      <router-link to="/recipeList">Continue Reading</router-link>
                     </button>
                   </div>
                 </div>
