@@ -2,7 +2,7 @@
 module.exports = {
   client: {
     service: {
-      name: "my-app",
+      name: "my-vue-app",
       // URL to the GraphQL API
       url: "http://hasura-food-recipe-application.herokuapp.com/v1/graphql",
     },

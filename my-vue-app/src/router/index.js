@@ -71,7 +71,6 @@ router.beforeEach((to, from, next) => {
     authService.setReturnUrl(to.fullPath);
     store.dispatch("account/login");
   }
-
   next();
 });
 

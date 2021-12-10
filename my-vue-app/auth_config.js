@@ -1,7 +1,8 @@
 export default {
-  domain: "dev-6sm7trdf.us.auth0.com",
-  clientId: "sa3xvhzW1wS4jp73xuOjg9BBcjIPbGch",
+  domain: "dev-0607-m09.us.auth0.com",
+  clientId: "8OrZV5nYjMT8csrTVPvlb0BqKqjy8j2y",
   callbackUrl: "http://localhost:3000/callback",
   responseType: "token id_token",
+  audience: "https://hasura.io/learn",
   scope: "openid",
 };

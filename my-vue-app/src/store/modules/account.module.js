@@ -19,7 +19,6 @@ const actions = {
     } catch (e) {
       authService.logout();
       commit("loginFailure", e);
-      dispatch("alert/error", '', { root: true });
     }
   },
   logout({ commit }) {

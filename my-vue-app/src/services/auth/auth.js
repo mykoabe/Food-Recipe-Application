@@ -5,8 +5,8 @@ const auth0Client = new auth0.WebAuth({
   domain: auth0Config.domain,
   clientID: auth0Config.clientId,
   redirectUri: auth0Config.callbackUrl,
-  audience: "VueApi",
   responseType: auth0Config.responseType,
+  audience: auth0Config.audience,
   scope: auth0Config.scope,
 });
 
