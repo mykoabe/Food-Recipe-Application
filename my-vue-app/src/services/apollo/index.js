@@ -22,7 +22,7 @@ const httpLink = new HttpLink({
 const getHeaders = () => {
   const headers = {};
   const token = authService.getAccessToken();
-  headers.authorization = token ? `Bearer ${token}` : null;
+  headers.authorization = token ? `Bearer ${token}` : "";
   return headers;
 };
 

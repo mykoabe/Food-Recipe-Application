@@ -73,6 +73,8 @@ const actions = {
     });
     commit("setHomeRecipes", response.data.recipe);
   },
+  
+  // I need this one 
   selectRecipe({ commit }, recipeId) {
     commit("setRecipe", recipeId);
     router.push({ name: "recipeDetail", params: { recipeId: recipeId } });
@@ -112,26 +114,6 @@ const actions = {
     });
     window.location.assign("/recipes");
   },
-  
-  // async addRecipes(context, recipe){
-  //   const recipeData = {
-  //     name: recipe.recipe,
-  //     description: recipe.descr,
-  //     time_to_prepare: recipe.prep,
-  //     number_of_servings: recipe.no_of_servings,
-  //     vegiterian: recipe.vegiterian,
-  //     instructions: recipe.instruction,
-  //     rating: 0,
-  //   }
-  //   const response = await apolloClient(idToken).mutate({
-  //     mutation: RECIPE_UPDATE_MUTATION,
-  //     variables: {
-  //       ...recipe,
-  //       created_by: authService.getUserId(),
-  //     },
-  //   });
-  //   context.commit("addRecipe", recipeData)
-  // }
 };
 
 const mutations = {
@@ -178,7 +160,7 @@ const mutations = {
 
 const getters = {
   selectedRecipe(state) {
-    return state.all.find((item) => item.id == state.one);
+    return state.all.find((item) => item.id === state.one);
   },
 };
 

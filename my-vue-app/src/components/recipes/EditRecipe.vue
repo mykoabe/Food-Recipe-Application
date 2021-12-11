@@ -1,28 +1,21 @@
 <template>
   <section>
-    <TheHeader />
-    <HeroComponent />
-    <MainAndRightSide />
-    <TheFooter />
+    <div v-if="isLoading">Is Loading</div>
+    <div v-for="(ingredient, index) in foodCategoryList" :key="index">
+      <h2>{{ ingredient.name }}</h2>
+      <h2>{{ recipe.name }}</h2>
+    </div>
   </section>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
 import Waiting from "../shared/Waiting.vue";
-import TheFooter from "../shared/TheFooter.vue";
-import TheHeader from "../shared/TheHeader.vue";
-import HeroComponent from "./HeroComponent.vue";
-import MainAndRightSide from "./MainAndRightSide.vue";
 
 export default {
   name: "EditRecipe",
   components: {
     Waiting,
-    HeroComponent,
-    TheHeader,
-    MainAndRightSide,
-    TheFooter,
   },
   computed: {
     ...mapState("recipes", {

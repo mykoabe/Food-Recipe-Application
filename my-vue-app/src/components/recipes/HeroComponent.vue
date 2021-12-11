@@ -6,7 +6,7 @@
       <div class="bg-red-500 bg-opacity-80">
         <div class="max-w-5xl mx-auto h-72 flex flex-col justify-center">
           <p class="text-white font-bold text-4xl">
-            Fresh Broccoli Salad with best recipe writer in the world
+            Fresh pizza with best salads with amzing writter
           </p>
           <nav class="flex justify-center mt-4" aria-label="Breadcrumb">
             <ol class="inline-flex items-center space-x-1 md:space-x-3">
@@ -57,7 +57,7 @@
                       text-sm
                       font-medium
                     "
-                    >Projects</a
+                    >Recipes</a
                   >
                 </div>
               </li>

@@ -330,7 +330,6 @@
 
 <script>
 export default {
-  emits: ["save-data"],
   data() {
     return {
       recipeName: {

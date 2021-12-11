@@ -8,7 +8,7 @@ import RecipeDetail from "../views/recipes/RecipeDetail.vue";
 import NotFound from "../views/NotFound.vue";
 import SubmitRecipe from "../views/SubmitRecipe.vue";
 import { authService } from "../services/auth/auth";
-import EditRecipe from "../components/recipes/EditRecipe.vue"
+import EditRecipe from "../components/recipes/EditRecipe.vue";
 import store from "../store";
 
 const routes = [
@@ -37,8 +37,9 @@ const routes = [
   },
   {
     path: "/recipes/:recipeId",
+    props: true,
     name: "recipeDetail",
-    component: EditRecipe,
+    component: RecipeDetail,
   },
   {
     path: "/submit",
