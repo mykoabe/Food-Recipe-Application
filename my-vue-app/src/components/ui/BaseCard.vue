@@ -41,10 +41,10 @@
             </div>
             <div class="pt-5">
               <i class="far fa-clock text-white"
-                ><span class="mx-3">55min</span></i
+                ><span class="mx-3">{{images.time_to_prepare}}</span></i
               >
               <i class="far fa-user text-white"
-                ><span class="mx-2">Mekuanint Abebe</span></i
+                ><span class="mx-2">{{images.user}}</span></i
               >
             </div>
           </div>
@@ -59,6 +59,7 @@ import firstImage from "../../assets/images/ranna-wordpress-theme-radiustheme.co
 import secondImage from "../../assets/images/blog16-630x650.jpg";
 import thirdImage from "../../assets/images/ranna_wordpress_theme_radiustheme.com_1-425x710.jpg";
 import fourthImage from "../../assets/images/ranna_wordpress_theme_radiustheme.com_1-530x338.jpg";
+import { mapState } from "vuex";
 export default {
   data() {
     return {
@@ -66,21 +67,43 @@ export default {
         {
           image1: firstImage,
           id: 1,
+          time_to_prepare: 6,
+          user: "mekuanint"
         },
         {
           image1: secondImage,
           id: 2,
+          time_to_prepare: 4,
+          user: "alemu"
         },
         {
           image1: thirdImage,
           id: 3,
+          time_to_prepare: 4,
+          user: "kebded"
         },
         {
           image1: fourthImage,
           id: 4,
+          time_to_prepare: 4,
+          user: "yibeltal"
         },
       ],
     };
+  },
+  computed: {
+    ...mapState("recipes", {
+      homeRecipes: "home",
+      isLoading: "isLoading",
+    }),
+  },
+  mounted() {
+    this.$store.dispatch("recipes/findForHome");
+  },
+  methods: {
+    goToRecipe($event) {
+      this.$store.dispatch("recipes/selectRecipe", +$event);
+    },
   },
 };
 </script>

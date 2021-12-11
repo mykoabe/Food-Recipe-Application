@@ -84,7 +84,8 @@
         </div>
 
         <div id="nav-menu-right" class="space-x-4 sm:md-10">
-          <button class="btn btn-login">Login</button>
+          <button v-if="!isAuthenticated" @click="login" class="btn btn-login">Login</button>
+          <button v-if="isAuthenticated" @click="logout" class="btn btn-login">Logout</button>
           <button class="btn btn-submit">
             <i class="fas fa-plus mr-3"></i
             ><router-link to="/submit">Submit Recipe</router-link>
@@ -97,7 +98,29 @@
 </template>
 
 <script>
-export default {};
+import { mapState, mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapState("recipes", {
+      isLoading: "isLoading",
+    }),
+    ...mapGetters("account", {
+      isAuthenticated: "userIsAuthenticated"
+    })
+  },
+  methods: {
+    goToRecipe($event) {
+      this.$store.dispatch("recipes/selectRecipe", +$event);
+    },
+    login() {
+      this.$store.dispatch("account/login");
+    },
+    logout() {
+      this.$store.dispatch("account/logout");
+    },
+  },
+};
 </script>
 
 <style scoped lang="postcss">

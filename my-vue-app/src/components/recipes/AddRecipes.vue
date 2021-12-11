@@ -4,7 +4,7 @@
       <div class="mt-10 sm:mt-0">
         <div class="md:grid md:grid-cols-3 md:gap-6 font-serif">
           <div class="mt-5 md:mt-0 md:col-span-3">
-            <form action="#" method="POST">
+            <form @submit.prevent="submitForm" action="#" method="POST">
               <div class="shadow overflow-hidden sm:rounded-md bg-red-500">
                 <div class="px-4 py-5 bg-gray-100 sm:p-6">
                   <div class="font-bold text-5xl text-center my-10">
@@ -18,6 +18,8 @@
                         >Recipe Name</label
                       >
                       <input
+                        v-model.trim="recipeName.val"
+                        @blur="clearValidity('recipeName')"
                         type="text"
                         name="recipe_name"
                         id="recipe_name"
@@ -35,6 +37,9 @@
                           pl-4
                         "
                       />
+                      <p v-if="!recipeName.isValid" class="text-red-500">
+                        Recipe Name must not be empty
+                      </p>
                     </div>
 
                     <div class="col-span-6 w-60 sm:col-span-3">
@@ -44,6 +49,8 @@
                         >Preparation time</label
                       >
                       <input
+                        v-model.trim="prep_time.val"
+                        @blur="clearValidity('prep_time')"
                         type="text"
                         name="prep_time"
                         id="prep_time"
@@ -60,6 +67,9 @@
                           pl-4
                         "
                       />
+                      <p v-if="!prep_time.isValid" class="text-red-500">
+                        Preparation time must not be empty
+                      </p>
                     </div>
 
                     <div class="col-span-6 sm:col-span-3">
@@ -70,9 +80,11 @@
                         Ingredients</label
                       >
                       <select
-                        id="country"
-                        name="country"
-                        autocomplete="country"
+                        v-model.trim="ingredients.val"
+                        @blur="clearValidity('ingredients')"
+                        id="ingredients"
+                        name="ingredients"
+                        autocomplete="ingredients"
                         class="
                           mt-1
                           block
@@ -93,6 +105,9 @@
                         <option class="my-8">Injera</option>
                         <option>Slices</option>
                       </select>
+                      <p v-if="!ingredients.isValid" class="text-red-500">
+                        Ingredient must not be empty
+                      </p>
                     </div>
 
                     <div class="col-span-6">
@@ -102,6 +117,8 @@
                         >Description</label
                       >
                       <textarea
+                        v-model.trim="description.val"
+                        @blur="clearValidity('description')"
                         name="description"
                         class="
                           resize
@@ -118,15 +135,19 @@
                       <p class="mt-2 text-md text-black">
                         Brief description for your Recipe.
                       </p>
+                      <p v-if="!description.isValid" class="text-red-500">
+                        Description must not be empty
+                      </p>
                     </div>
                     <div class="col-span-6">
                       <label
-                        for="street_address"
+                        for="instruction"
                         class="inline text-xl font-bold text-black"
                         >Instructions</label
                       >
                       <textarea
-                        name="description"
+                        v-model.trim="instruction.val"
+                        name="instruction"
                         class="
                           resize
                           mt-1
@@ -148,6 +169,7 @@
                         >No of Servings</label
                       >
                       <input
+                        v-model.trim="no_of_servings.val"
                         type="text"
                         name="no_of_serving"
                         id="city"
@@ -168,6 +190,7 @@
                     <div class="col-span-6 sm:col-span-3 lg:col-span-2 ml-10">
                       <label class="inline-flex items-center">
                         <input
+                          v-model.trim="vegiterian.val"
                           type="checkbox"
                           class="form-checkbox h-5 w-5"
                           checked
@@ -176,6 +199,31 @@
                           >Vegetarian</span
                         >
                       </label>
+                    </div>
+
+                    <div class="col-span-6 sm:col-span-3 lg:col-span-2 ml-10">
+                      <label
+                        for="calories"
+                        class="block text-xl font-bold text-black"
+                        >Calories</label
+                      >
+                      <input
+                        v-model.trim="calories.val"
+                        type="text"
+                        name="calories"
+                        id="calories"
+                        class="
+                          mt-1
+                          h-8
+                          block
+                          w-full
+                          shadow-sm
+                          sm:text-sm
+                          rounded-md
+                          outline-none
+                          pl-4
+                        "
+                      />
                     </div>
                   </div>
                   <div>
@@ -243,7 +291,9 @@
                     </div>
                   </div>
                 </div>
-
+                <h1 class="text-red-500 bg-white" v-if="!formIsValid">
+                  Please fix the above errors and submit again
+                </h1>
                 <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   <button
                     type="submit"
@@ -279,7 +329,98 @@
 </template>
 
 <script>
-export default {};
+export default {
+  emits: ["save-data"],
+  data() {
+    return {
+      recipeName: {
+        val: "",
+        isValid: true,
+      },
+      prep_time: {
+        val: "",
+        isValid: true,
+      },
+      ingredients: {
+        val: "",
+        isValid: true,
+      },
+      description: {
+        val: "",
+        isValid: true,
+      },
+      no_of_servings: {
+        val: 0,
+        isValid: true,
+      },
+      vegiterian: {
+        val: false,
+        isValid: true,
+      },
+      calories: {
+        val: 0,
+        isValid: true,
+      },
+      instruction: {
+        val: "",
+        isValid: true,
+      },
+      formIsValid: true,
+    };
+  },
+  methods: {
+    clearValidity(input) {
+      this[input].isValid = true;
+    },
+    validateForm() {
+      this.formIsValid = true;
+      if (this.recipeName.val === "") {
+        this.recipeName.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.prep_time.val === "") {
+        this.prep_time.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.ingredients.val === "") {
+        this.ingredients.isValid = false;
+        this.formIsValid = false;
+      }
+      if (this.description.val === "") {
+        this.description.isValid = false;
+        this.formIsValid = false;
+      }
+    },
+    submitForm() {
+      this.validateForm();
+      if (!this.formIsValid) {
+        return;
+      }
+      const formData = {
+        recipe: this.recipeName.val,
+        prep: this.prep_time.val,
+        ingr: this.ingredients.val,
+        descr: this.description.val,
+        instruction: this.instruction.val,
+        no_of_servings: this.no_of_servings.val,
+        vegiterian: this.vegiterian.val,
+        calories_per_serving: this.calories.val,
+      };
+      const realData = {
+        name: formData.recipe,
+        description: formData.descr,
+        time_to_perpare: formData.prep,
+        number_of_servings: formData.no_of_servings,
+        instructions: formData.instruction,
+        food_category_id: 1,
+        vegetarian: formData.vegiterian,
+        calories_per_serving: formData.calories_per_serving,
+      };
+      console.log(realData);
+      this.$store.dispatch("recipes/insertRecipes", realData);
+    },
+  },
+};
 </script>
 
 <style></style>

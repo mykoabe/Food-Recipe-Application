@@ -54,6 +54,9 @@ const getters = {
   getReturnUrl(state, getters) {
     return getters["getUser"] && authService.getReturnUrl();
   },
+  userIsAuthenticated(state){
+    return state.status.loggedIn;
+  }
 };
 
 export default {
