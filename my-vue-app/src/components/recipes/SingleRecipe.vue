@@ -84,32 +84,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.content {
-  margin-top: 20px;
-}
-.actions {
-  display: flex;
-  justify-content: space-between;
-}
-.recipe .recipe-header {
-  margin-top: 20px;
-  text-align: center;
-}
-.recipe .recipe-body {
-  margin-top: 20px;
-}
-form table {
-  margin-top: 20px;
-}
-.ingredient-button {
-  text-align: right;
-}
-
-@media screen and (min-width: 992px) {
-  .ingredient-button {
-    padding-top: 37px;
-  }
-}
-</style>

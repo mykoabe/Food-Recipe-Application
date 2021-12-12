@@ -75,9 +75,9 @@
                       clip-rule="evenodd"
                     ></path>
                   </svg>
-                  <span class="text-gray-400 ml-1 md:ml-2 text-sm font-medium"
-                    >Fresh Broccoli Salad with best recipe writer in the
-                    world</span
+                  <span
+                    class="text-gray-400 ml-1 md:ml-2 text-sm font-medium"
+                    >{{ recipe.name }}</span
                   >
                 </div>
               </li>
@@ -88,3 +88,31 @@
     </div>
   </section>
 </template>
+
+<script>
+import { mapState, mapGetters } from "vuex";
+import Waiting from "../shared/Waiting.vue";
+import MainAndRightSide from "./MainAndRightSide.vue";
+export default {
+  name: "EditRecipe",
+  data() {
+    return {
+      recipe_ingredient: {
+        ingredient_id: "",
+        quantity: 0,
+        comments: "",
+      },
+    };
+  },
+  components: {
+    Waiting,
+    MainAndRightSide,
+  },
+  computed: {
+    ...mapState("recipes", {
+      isLoading: "isLoading",
+    }),
+    ...mapGetters("recipes", { recipe: "selectedRecipe" }),
+  },
+};
+</script>

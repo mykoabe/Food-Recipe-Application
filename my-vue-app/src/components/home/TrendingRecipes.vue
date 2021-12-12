@@ -14,75 +14,25 @@
               </div>
             </div>
             <div class="grid md:grid-cols-2 gap-12 mt-8 grid-cols-1">
-              <div
-                v-for="(trending, index) in trending"
+              <div v-if="isLoading">Is Loading</div>
+              <recipe-item
+                v-for="(recipe, index) in trending"
                 :key="index"
-                id="first_inline"
-              >
-                <div class="rounded overflow-hidden shadow-lg">
-                  <img
-                    class="w-md"
-                    src="../../assets/images/ranna_wordpress_theme_radiustheme.com_1-530x338.jpg"
-                    alt="River"
-                  />
-                  <div class="px-6 py-4">
-                    <div
-                      class="font-bold text-md mb-2 text-red-600 text-center"
-                    >
-                      {{ trending.food_category.name }}
-                    </div>
-                    <p class="text-gray-700 text-center">
-                      {{ trending.description }}
-                    </p>
-                  </div>
-                  <div class="text-center">
-                    <span><i class="far fa-user pr-2"></i>by</span>
-                    <span><i class="far fa-clock py-5 px-2"></i>44min</span>
-                    <span><i class="far fa-heart px-3"></i>4 like</span>
-                    <span
-                      ><i class="fas fa-star text-gray-300 text-sm pl-3"></i
-                    ></span>
-                    <span
-                      ><i class="fas fa-star text-gray-300 text-sm"></i
-                    ></span>
-                    <span
-                      ><i class="fas fa-star text-gray-300 text-sm"></i
-                    ></span>
-                    <span
-                      ><i class="fas fa-star text-gray-300 text-sm"></i
-                    ></span>
-                    <span
-                      ><i class="fas fa-star text-gray-300 text-sm"></i
-                    ></span>
-                  </div>
-                  <div class="text-center mx-7">
-                    The doner is a Turkish creation of meat, often lamb, but not
-                    necessarily so, that is seasoned, stacked in a
-                  </div>
-                  <div class="flex ml-24 mt-8">
-                    <button
-                      @click.prevent="goToRecipe(trending.id)"
-                      class="
-                        bg-red-500
-                        hover:bg-red-700
-                        text-white
-                        font-bold
-                        py-2
-                        px-4
-                        border border-red-700
-                        rounded
-                        mb-8
-                      "
-                    >
-                      Continue Reading
-                    </button>
-                  </div>
-                </div>
-              </div>
+                :id="recipe.id"
+                :name="recipe.name"
+                :description="recipe.description"
+                :time_to_perpare="recipe.time_to_perpare"
+                :number_of_servings="recipe.number_of_servings"
+                :vegetarian="recipe.vegetarian"
+                :calories_per_serving="recipe.calories_per_serving"
+                :instructions="recipe.instructions"
+                :likes="recipe.likes"
+                :rating="recipe.rating"
+              ></recipe-item>
             </div>
           </div>
         </div>
-        
+
         <div id="second_row">
           <EditorsChoice />
         </div>
@@ -104,9 +54,15 @@
 import MostRatedRecipe from "./MostRatedRecipe.vue";
 import EditorsChoice from "./EditorsChoice.vue";
 import SubscribeAndFollow from "./SubscribeAndFollow.vue";
+import RecipeItem from "../../views/recipes/RecipeItem.vue";
 import { mapState } from "vuex";
 export default {
-  components: { MostRatedRecipe, EditorsChoice, SubscribeAndFollow },
+  components: {
+    MostRatedRecipe,
+    EditorsChoice,
+    SubscribeAndFollow,
+    RecipeItem,
+  },
   computed: {
     ...mapState("recipes", {
       trending: "trending",

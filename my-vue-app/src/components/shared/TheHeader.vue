@@ -26,9 +26,15 @@
         </div>
 
         <div id="nav-menu-right" class="space-x-4 mr-16">
-          <a href="#" class="text-sm hover:font-medium"
-            ><i class="fas fa-shopping-bag fa-1.5x"></i
-          ></a>
+          <a href="#" class="text-sm hover:font-medium">
+            <router-link to="/bookmarks">
+              <i class="fas fa-shopping-bag fa-2x relative"
+                ><span class="absolute text-xl bottom-2 text-white-500">{{
+                  cartQuantity
+                }}</span></i
+              >
+            </router-link>
+          </a>
           <button class="btn btn-account">MyAcount</button>
         </div>
       </div>
@@ -84,8 +90,12 @@
         </div>
 
         <div id="nav-menu-right" class="space-x-4 sm:md-10">
-          <button v-if="!isAuthenticated" @click="login" class="btn btn-login">Login</button>
-          <button v-if="isAuthenticated" @click="logout" class="btn btn-login">Logout</button>
+          <button v-if="!isAuthenticated" @click="login" class="btn btn-login">
+            Login
+          </button>
+          <button v-if="isAuthenticated" @click="logout" class="btn btn-login">
+            Logout
+          </button>
           <button class="btn btn-submit">
             <i class="fas fa-plus mr-3"></i
             ><router-link to="/submit">Submit Recipe</router-link>
@@ -106,8 +116,11 @@ export default {
       isLoading: "isLoading",
     }),
     ...mapGetters("account", {
-      isAuthenticated: "userIsAuthenticated"
-    })
+      isAuthenticated: "userIsAuthenticated",
+    }),
+    cartQuantity() {
+      return this.$store.getters["carts/quantity"];
+    },
   },
   methods: {
     goToRecipe($event) {

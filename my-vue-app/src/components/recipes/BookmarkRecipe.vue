@@ -3,21 +3,9 @@
     <TheHeader />
     <div id="category_section" class="lg:mx-32 sm:mt-6 md:mx-6 mx-6">
       <div class="grid md:grid-cols-3 gap-12 mt-8 grid-cols-1">
-        <div v-if="isLoading">
-          <div class="flex justify-center items-center">
-            <div
-              class="
-                animate-spin
-                rounded-full
-                h-32
-                w-32
-                border-t-2 border-b-2 border-purple-500
-              "
-            ></div>
-          </div>
-        </div>
-        <recipe-item
-          v-for="(recipe, index) in recipes"
+        <div v-if="isLoading">Is Loading</div>
+        <bookmark-item
+          v-for="(recipe, index) in cartItems"
           :key="index"
           :id="recipe.id"
           :name="recipe.name"
@@ -31,25 +19,32 @@
           :rating="recipe.rating"
           class=""
         >
-        </recipe-item>
+        </bookmark-item>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import { mapState } from "vuex";
-import TheHeader from "../../components/shared/TheHeader.vue";
-import RecipeItem from "./RecipeItem.vue";
-
+import TheHeader from "../shared/TheHeader.vue";
+import TheFooter from "../shared/TheFooter.vue";
+import BookmarkItem from "../bookmark/BookmarkItem.vue";
+import { mapGetters, mapState } from "vuex";
 export default {
-  name: "RecipeList",
-  components: { TheHeader, RecipeItem },
+  components: {
+    TheHeader,
+    TheFooter,
+    BookmarkItem,
+  },
+
   computed: {
-    ...mapState("recipes", { recipes: "all", isLoading: "isLoading" }),
+    ...mapGetters("carts", { cartItems: "cartItems" }),
+    ...mapState("recipes", {
+      isLoading: "isLoading",
+    }),
   },
   mounted() {
-    this.$store.dispatch("recipes/findAll");
+    console.log(this.cartItems);
   },
 };
 </script>

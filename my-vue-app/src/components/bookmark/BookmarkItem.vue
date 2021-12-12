@@ -1,28 +1,26 @@
 <template>
   <section>
-    <div id="header">
-      <h2 class="text-2xl font-bold">Most Rated Recipes</h2>
-      <div class="w-full bg-gray-200 rounded-full h-0.5 my-5">
-        <div class="bg-red-600 h-0.5 rounded-full" style="width: 10%"></div>
+    <div class="rounded overflow-hidden shadow-lg">
+      <img
+        class="w-md"
+        src="../../assets/images/ranna_wordpress_theme_radiustheme.com_1-530x338.jpg"
+        alt="River"
+      />
+      <div class="px-6 py-4">
+        <div class="font-bold text-md mb-2 text-red-600 text-center">
+          {{ name }}
+        </div>
+        <p class="text-gray-700 text-center">
+          {{ description }}
+        </p>
       </div>
-    </div>
-
-    <div
-      v-for="(recipe, index) in mostRated"
-      :key="index"
-      class="grid grid-cols-2 gap-9 my-8"
-    >
-      <div class="">
-        <img
-          class="w-full rounded-lg"
-          src="../../assets/images/ranna_wordpress_theme_radiustheme.com_1-530x338.jpg"
-          alt="River"
-        />
-      </div>
-
-      <div>
-        <p>{{ recipe.name }}</p>
-        <span v-if="recipe.rating <= 1">
+      <div class="text-center">
+        <span><i class="far fa-user pr-2"></i>by</span>
+        <span
+          ><i class="far fa-clock py-5 px-2"></i>{{ time_to_perpare }}min</span
+        >
+        <span><i class="far fa-heart px-3"></i>{{ likes }} like</span>
+        <span v-if="rating <= 1">
           <span><i class="fas fa-star text-gray-300 text-sm pl-3"></i></span>
           <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
           <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
@@ -30,7 +28,7 @@
           <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
         </span>
 
-        <span v-if="recipe.rating === 2">
+        <span v-if="rating === 2">
           <span><i class="fas fa-star text-yellow-300 text-sm pl-3"></i></span>
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
           <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
@@ -38,7 +36,7 @@
           <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
         </span>
 
-        <span v-if="recipe.rating === 3">
+        <span v-if="rating === 3">
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
@@ -46,7 +44,7 @@
           <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
         </span>
 
-        <span v-if="recipe.rating === 4">
+        <span v-if="rating === 4">
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
@@ -54,36 +52,66 @@
           <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
         </span>
 
-        <span v-if="recipe.rating > 4">
+        <span v-if="rating > 4">
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
           <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
         </span>
-        <span class="pl-1">({{ recipe.rating }}/5)</span>
-        <div><button @click="goToRecipe(recipe.id)" class="bg-red-500 text-white rounded-lg ">ReadMore</button></div>
+      </div>
+      <div class="text-center mx-7">
+        {{ description }}
+      </div>
+      <div class="flex ml-8 space-x-3 mt-8">
+        <button
+          @click.prevent="goToRecipe(id)"
+          class="
+            bg-red-500
+            hover:bg-red-700
+            text-white
+            font-bold
+            py-2
+            px-4
+            border border-red-700
+            rounded
+            mb-8
+          "
+        >
+          Continue Reading
+        </button>
+
+        <button
+          @click.prevent="remove"
+          class="bg-gray-300 hover:bg-red-500 text-black rounded mb-8 px-3"
+        >
+          Remove
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
 export default {
+  props: [
+    "id",
+    "name",
+    "description",
+    "time_to_perpare",
+    "number_of_servings",
+    "vegetarian",
+    "instructions",
+    "calories_per_serving",
+    "rating",
+    "likes",
+  ],
   computed: {
-    ...mapState("recipes", {
-      mostRated: "rated",
-      isLoading: "isLoading",
-    }),
-  },
-  mounted() {
-    this.$store.dispatch("recipes/findMostRated");
-  },
-  methods: {
-    goToRecipe($event) {
-      this.$store.dispatch("recipes/selectRecipe", +$event);
+    remove() {
+      this.$store.dispatch("carts/removeFromCart", { recipeId: this.id });
     },
   },
 };
 </script>
+
+<style></style>

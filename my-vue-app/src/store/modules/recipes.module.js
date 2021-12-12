@@ -13,6 +13,7 @@ import {
   INGREDIENTS_QUERY,
   RECIPE_INGREDIENT_MUTATION,
   RECIPE_INSERT_MUTATION,
+  ALL_RECIPES_SEARCH_QUERY
 } from "../../queries";
 
 let state = {
@@ -162,6 +163,9 @@ const getters = {
   selectedRecipe(state) {
     return state.all.find((item) => item.id === state.one);
   },
+  getRecipes(state){
+    return state.all
+  }
 };
 
 export default {

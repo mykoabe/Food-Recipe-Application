@@ -11,91 +11,21 @@
         <!-- First card left column -->
         <div id="first_inline">
           <div v-if="isLoading">Is Loading</div>
-          <div
+
+          <recipe-item
             v-for="(recipe, index) in editorChoice"
             :key="index"
-            class="rounded overflow-hidden shadow-lg"
-          >
-            <img
-              class="w-md"
-              src="../../assets/images/ranna_wordpress_theme_radiustheme.com_1-530x338.jpg"
-              alt="River"
-            />
-            <div class="px-6 py-4">
-              <div class="font-bold text-md mb-2 text-red-600 text-center">
-                {{ recipe.food_category.name }}
-              </div>
-              <p class="text-gray-700 text-center">
-                {{ recipe.name }}
-              </p>
-            </div>
-            <div class="text-center">
-              <span><i class="far fa-user pr-2"></i>meku</span>
-              <span
-                ><i class="far fa-clock py-5 px-2"></i
-                >{{ recipe.time_to_prepare }}min</span
-              >
-              <span
-                ><i class="far fa-heart px-3"></i>{{ recipe.likes }} like</span
-              >
-              <span v-if="recipe.rating <= 2">
-                <span
-                  ><i class="fas fa-star text-yellow-300 text-sm pl-3"></i
-                ></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-              </span>
-              <span v-if="recipe.rating < 1">
-                <span
-                  ><i class="fas fa-star text-gray-300 text-sm pl-3"></i
-                ></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-              </span>
-              <span v-if="recipe.rating === 3">
-                <span
-                  ><i class="fas fa-star text-yellow-300 text-sm pl-3"></i
-                ></span>
-                <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-gray-300 text-sm"></i></span>
-              </span>
-              <span v-else>
-                <span
-                  ><i class="fas fa-star text-yellow-300 text-sm pl-3"></i
-                ></span>
-                <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
-                <span><i class="fas fa-star text-yellow-300 text-sm"></i></span>
-              </span>
-            </div>
-            <div class="text-center mx-7">
-              {{ recipe.description }}
-            </div>
-            <div class="flex ml-24 mt-8">
-              <button
-                class="
-                  bg-red-500
-                  hover:bg-red-700
-                  text-white
-                  font-bold
-                  py-2
-                  px-4
-                  border border-red-700
-                  rounded
-                  mb-8
-                "
-              >
-                Continue Reading
-              </button>
-            </div>
-          </div>
+            :id="recipe.id"
+            :name="recipe.name"
+            :description="recipe.description"
+            :time_to_perpare="recipe.time_to_perpare"
+            :number_of_servings="recipe.number_of_servings"
+            :vegetarian="recipe.vegetarian"
+            :calories_per_serving="recipe.calories_per_serving"
+            :instructions="recipe.instructions"
+            :likes="recipe.likes"
+            :rating="recipe.rating"
+          ></recipe-item>
         </div>
 
         <!-- second column starts here -->
@@ -199,9 +129,10 @@
 
 <script>
 import MostRatedRecipe from "./MostRatedRecipe.vue";
+import RecipeItem from "../../views/recipes/RecipeItem.vue";
 import { mapState } from "vuex";
 export default {
-  components: { MostRatedRecipe },
+  components: { MostRatedRecipe, RecipeItem },
   computed: {
     ...mapState("recipes", {
       recipes: "all",

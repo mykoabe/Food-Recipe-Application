@@ -280,6 +280,7 @@
                               name="file-upload"
                               type="file"
                               class="sr-only"
+                              @change="onFileSelected"
                             />
                           </label>
                           <p class="pl-1">or drag and drop</p>
@@ -365,9 +366,13 @@ export default {
         isValid: true,
       },
       formIsValid: true,
+      selectedFile: null,
     };
   },
   methods: {
+    onFileSelected(event) {
+      this.selectedFile = event.target.files[0];
+    },
     clearValidity(input) {
       this[input].isValid = true;
     },

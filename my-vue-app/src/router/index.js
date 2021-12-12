@@ -1,14 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/home/HomeView.vue";
-import AboutView from "../views/AboutView.vue";
 import CallBack from "../views/CallBack.vue";
 import Category from "../components/category/Category.vue";
 import RecipeList from "../views/recipes/RecipeList.vue";
 import RecipeDetail from "../views/recipes/RecipeDetail.vue";
 import NotFound from "../views/NotFound.vue";
 import SubmitRecipe from "../views/SubmitRecipe.vue";
+import BookmarkRecipe from "../components/recipes/BookmarkRecipe.vue"
 import { authService } from "../services/auth/auth";
-import EditRecipe from "../components/recipes/EditRecipe.vue";
 import store from "../store";
 
 const routes = [
@@ -34,6 +33,11 @@ const routes = [
     path: "/recipes",
     name: "Recipe",
     component: RecipeList,
+  },
+  {
+    path: "/bookmarks",
+    name: "Bookmark",
+    component: BookmarkRecipe,
   },
   {
     path: "/recipes/:recipeId",

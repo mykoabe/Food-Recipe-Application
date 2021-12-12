@@ -1,5 +1,21 @@
 import gql from "graphql-tag";
 
+export const ALL_RECIPES_SEARCH_QUERY = gql`
+  query AllRecipesSearchQuery($searchText: String!) {
+    recipe(filter: {
+      OR: [{
+        name_contains: $searchText
+      }, {
+        description_contains: $searchText
+      }]
+    }) {
+      id
+      name
+      description
+      createdAt
+    }
+  }
+`
 export const RECIPES_QUERY = gql`
   query getRecipes {
     recipe(order_by: { id: asc }) {
@@ -11,6 +27,9 @@ export const RECIPES_QUERY = gql`
       vegetarian
       calories_per_serving
       food_category_id
+      time_to_perpare
+      likes
+      rating
     }
   }
 `;
